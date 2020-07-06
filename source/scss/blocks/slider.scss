@@ -123,6 +123,10 @@
     font-size: 1.4rem;
     line-height: 1.5rem;
   }
+
+  .swiper-slide-active &, .swiper-slide-next & {
+    animation: fadeInRight 1s;
+  }
 }
 
 .slider__controls {
