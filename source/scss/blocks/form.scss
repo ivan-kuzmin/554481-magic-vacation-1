@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .form__label {
@@ -43,9 +44,18 @@
   border: 0;
   border-radius: 3rem;
   outline: none;
+  animation: scaleFullWidth 0.5s;
 
   &:focus {
     border: 1px solid $c-purple;
+  }
+
+  @keyframes scaleFullWidth {
+    from {
+      opacity: 0;
+      width: 0;
+      padding: 0;
+    }
   }
 
   @media (min-width: $stop-scaling) {
@@ -79,7 +89,7 @@
 }
 
 .form__button {
-  flex-grow: 1;
+  width: 18rem;
 
   @media (orientation: portrait) {
     position: relative;

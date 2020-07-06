@@ -99,3 +99,25 @@ img {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(15%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(15%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
