@@ -27,7 +27,6 @@
 }
 
 .page-header__logo {
-  @include hover;
   position: relative;
   flex: none;
   top: -0.5rem;
@@ -42,6 +41,7 @@
   transition-timing-function: cubic-bezier(.22,.41,.45,1);
 
   body.loaded & {
+    @include hover;
     transform: none;
     opacity: 1;
   }
@@ -190,7 +190,6 @@
   opacity: 0;
   transition-property: opacity;
   transition-duration: 1s;
-  transition-delay: 0.1s;
   transition-timing-function: cubic-bezier(.22,.41,.45,1);
 
   body.loaded & {
@@ -296,7 +295,6 @@
           width: 100%;
           transition-property: width;
           transition-duration: 0.8s;
-          transition-delay: 0.1s;
           transition-timing-function: cubic-bezier(.22,.41,.45,1);
         }
       }
