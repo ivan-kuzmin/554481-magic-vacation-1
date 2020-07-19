@@ -31,6 +31,10 @@ export default class FullPageScroll {
     this.lastScreen = this.activeScreen;
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
     this.activeScreen = (newIndex < 0) ? 0 : newIndex;
+    if (this.lastScreen === 3) {
+      const rulesLink = document.getElementsByClassName(`rules__link`)[0];
+      rulesLink.style.animationPlayState = `paused`;
+    }
     this.changePageDisplay();
   }
 
