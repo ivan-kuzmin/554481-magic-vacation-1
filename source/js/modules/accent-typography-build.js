@@ -1,7 +1,7 @@
 export default class AccentTypographyBuild {
   constructor(params) {
     this._duration = params.duration || 500;
-    this._delay = params.delay || 100;
+    this._delay = params.delay || 0;
     this._wordDelay = params.wordDelay || 0;
     this._element = params.element;
 

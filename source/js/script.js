@@ -27,6 +27,7 @@ fullPageScroll.init();
 
 const introTitleAnimation = new AccentTypographyBuild({
   element: document.querySelector(`.intro__title`),
+  delay: 100,
   wordDelay: 500
 });
 setTimeout(()=>{
@@ -34,7 +35,8 @@ setTimeout(()=>{
 }, 500);
 
 const introDateAnimation = new AccentTypographyBuild({
-  element: document.querySelector(`.intro__date`)
+  element: document.querySelector(`.intro__date`),
+  delay: 100
 });
 setTimeout(()=>{
   introDateAnimation.runAnimation();
