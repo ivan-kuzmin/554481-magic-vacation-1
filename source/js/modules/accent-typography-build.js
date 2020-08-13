@@ -11,13 +11,7 @@ export default class AccentTypographyBuild {
   createElement(letter, letterIndex, wordIndex) {
     const span = document.createElement(`span`);
     span.textContent = letter;
-    span.style.margin = `0 -0.02em`;
-    span.style.display = `inline-block`;
-    span.style.opacity = 0;
-    span.style.transform = `translate3d(0, 100%, 0)`;
-    span.style.transitionProperty = `transform, opacity`;
     span.style.transitionDuration = `${this._duration}ms`;
-    span.style.transitionTimingFunction = `ease`;
     span.style.transitionDelay = `${(3 - letterIndex % 3) * this._delay + wordIndex * this._wordDelay}ms`;
     return span;
   }
@@ -35,13 +29,7 @@ export default class AccentTypographyBuild {
         return fragment;
       }, document.createDocumentFragment());
       const wordContainer = document.createElement(`span`);
-      wordContainer.style.display = `inline-flex`;
-      wordContainer.style.overflowY = `hidden`;
-      wordContainer.style.letterSpacing = 0;
-      wordContainer.style.padding = `0 0.02em`;
-      if (wordIndex !== text.length - 1) {
-        wordContainer.style.marginRight = `5px`;
-      }
+      wordContainer.classList.add(`accent-typography`);
       wordContainer.appendChild(wordElement);
       fragmentParent.appendChild(wordContainer);
       return fragmentParent;
@@ -56,10 +44,7 @@ export default class AccentTypographyBuild {
       return;
     }
     this._element.childNodes.forEach((word) => {
-      word.childNodes.forEach((letter) => {
-        letter.style.transform = `translate3d(0, 20%, 0)`;
-        letter.style.opacity = 1;
-      });
+      word.classList.add(`accent-typography--active`);
     });
   }
 }
