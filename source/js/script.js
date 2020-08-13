@@ -9,6 +9,7 @@ import form from './modules/form.js';
 import social from './modules/social.js';
 import FullPageScroll from './modules/full-page-scroll';
 import onLoad from './modules/onload';
+import AccentTypographyBuild from './modules/accent-typography-build';
 
 // init modules
 mobileHeight();
@@ -23,3 +24,20 @@ onLoad();
 
 const fullPageScroll = new FullPageScroll();
 fullPageScroll.init();
+
+const introTitleAnimation = new AccentTypographyBuild({
+  element: document.querySelector(`.intro__title`),
+  delay: 100,
+  wordDelay: 500
+});
+setTimeout(()=>{
+  introTitleAnimation.runAnimation();
+}, 500);
+
+const introDateAnimation = new AccentTypographyBuild({
+  element: document.querySelector(`.intro__date`),
+  delay: 100
+});
+setTimeout(()=>{
+  introDateAnimation.runAnimation();
+}, 1250);
