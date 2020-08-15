@@ -223,6 +223,36 @@
     opacity: 0.5;
     pointer-events: none;
   }
+
+  &--prev {
+    animation: sliderControlPrev 0.5s;
+  }
+
+  &--next {
+    animation: sliderControlNext 0.5s;
+  }
+
+  @keyframes sliderControlPrev {
+    from {
+      opacity: 0;
+      transform: translateX(-250%) rotate(-180deg);
+    }
+    to {
+      opacity: 0.5;
+      transform: translateX(0) rotate(0);
+    }
+  }
+
+  @keyframes sliderControlNext {
+    from {
+      opacity: 0;
+      transform: translateX(250%) rotate(180deg);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) rotate(0);
+    }
+  }
 }
 
 .slider__pagination.swiper-pagination {
