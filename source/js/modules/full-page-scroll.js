@@ -10,6 +10,10 @@ export default class FullPageScroll {
     this.activeScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
+
+    this.runningAnimations = {
+      jorneys: false,
+    };
   }
 
   init() {
@@ -69,6 +73,10 @@ export default class FullPageScroll {
   changeActiveMenuItem() {
     const activeItem = Array.from(this.menuElements).find((item) => item.dataset.href === this.screenElements[this.activeScreen].id);
     if (activeItem) {
+      if (activeItem.getAttribute(`data-href`) === `prizes` && !this.runningAnimations.jorneys) {
+        this.runningAnimations.jorneys = true;
+        document.getElementById(`journeys`).beginElement();
+      }
       this.menuElements.forEach((item) => item.classList.remove(`active`));
       activeItem.classList.add(`active`);
     }
