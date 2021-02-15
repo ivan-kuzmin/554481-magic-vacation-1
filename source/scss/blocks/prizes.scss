@@ -130,8 +130,14 @@
     .prizes__icon {
       position: relative;
       left: -5.9rem;
-      bottom: -1.4rem;
       width: 26.8rem;
+      height: 104px;
+
+      & > svg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
 
       @media (min-width: $stop-scaling) {
         left: -59px;
