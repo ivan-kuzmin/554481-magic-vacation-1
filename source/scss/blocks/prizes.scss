@@ -127,13 +127,17 @@
   }
 
   &--journeys {
+    transition: transform 1s;
+    transform: translateX(0);
+
     .prizes__icon {
       position: relative;
       left: -5.9rem;
       width: 26.8rem;
-      height: 104px;
+      height: 300px;
 
       & > svg {
+        height: 100%;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -163,6 +167,8 @@
   }
 
   &--cases {
+    transition: opacity 1s;
+    opacity: 1;
     margin-left: 7rem;
 
     @media (min-width: $stop-scaling) {
@@ -176,6 +182,15 @@
 
     .prizes__icon {
       width: 18.8rem;
+      position: relative;
+      height: 300px;
+
+      & > svg {
+        height: 100%;
+        position: absolute;
+        transform: translateX(-50%);
+        left: 20%;
+      }
 
       @media (min-width: $stop-scaling) {
         width: 188px;
@@ -197,6 +212,7 @@
   }
 
   &--codes {
+    opacity: 0;
     @media (max-width: $tablet) and (orientation: portrait) {
       padding-left: 0.8rem;
     }
@@ -220,6 +236,14 @@
         width: 10rem;
       }
     }
+  }
+
+  &--translate {
+    transform: translateX(100%);
+  }
+
+  &--hidden {
+    opacity: 0;
   }
 }
 
