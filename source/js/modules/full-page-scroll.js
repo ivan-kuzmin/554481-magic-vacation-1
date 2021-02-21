@@ -79,10 +79,10 @@ export default class FullPageScroll {
         document.getElementById(`journeysAnimation`).beginElement();
         window.setTimeout(() => {
           document.getElementById(`journeys`).classList.remove(`prizes__item--translate`);
-        }, 2000);
+        }, 3500);
         window.setTimeout(() => {
           document.getElementById(`cases`).classList.remove(`prizes__item--hidden`);
-        }, 2500);
+        }, 4000);
         window.setTimeout(() => {
           this.runningAnimations.cases = true;
           document.getElementById(`casesAnimation`).beginElement();
