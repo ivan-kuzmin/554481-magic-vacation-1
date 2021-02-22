@@ -13,6 +13,7 @@ export default class FullPageScroll {
 
     this.runningAnimations = {
       jorneys: false,
+      cases: false,
     };
   }
 
@@ -75,7 +76,17 @@ export default class FullPageScroll {
     if (activeItem) {
       if (activeItem.getAttribute(`data-href`) === `prizes` && !this.runningAnimations.jorneys) {
         this.runningAnimations.jorneys = true;
-        document.getElementById(`journeys`).beginElement();
+        document.getElementById(`journeysAnimation`).beginElement();
+        window.setTimeout(() => {
+          document.getElementById(`journeys`).classList.remove(`prizes__item--translate`);
+        }, 3500);
+        window.setTimeout(() => {
+          document.getElementById(`cases`).classList.remove(`prizes__item--hidden`);
+        }, 4000);
+        window.setTimeout(() => {
+          this.runningAnimations.cases = true;
+          document.getElementById(`casesAnimation`).beginElement();
+        }, 4000);
       }
       this.menuElements.forEach((item) => item.classList.remove(`active`));
       activeItem.classList.add(`active`);
