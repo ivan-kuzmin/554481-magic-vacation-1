@@ -134,7 +134,7 @@
       position: relative;
       left: -5.9rem;
       width: 26.8rem;
-      height: 300px;
+      height: 30rem;
 
       & > svg {
         height: 100%;
@@ -153,11 +153,13 @@
         left: 0;
         bottom: 0;
         width: 9.4rem;
+        height: 11rem;
       }
 
       @media (max-width: $tablet) and (orientation: landscape) {
         left: -2rem;
         width: 13rem;
+        height: 21rem;
       }
 
       @media (max-width: $mobile) and (orientation: landscape) {
@@ -183,12 +185,13 @@
     .prizes__icon {
       width: 18.8rem;
       position: relative;
-      height: 300px;
+      height: 30rem;
 
       & > svg {
         height: 100%;
         position: absolute;
         transform: translateX(-50%);
+        bottom: 0;
         left: 20%;
       }
 
@@ -199,10 +202,16 @@
       @media (max-width: $tablet) and (orientation: portrait) {
         margin-right: 1.3rem;
         width: 10.211rem;
+        height: 11rem;
       }
 
       @media (max-width: $tablet) and (orientation: landscape) {
         width: 9.5rem;
+        height: 21rem;
+
+        & > svg {
+          transform: translateX(-40%);
+        }
       }
 
       @media (max-width: $mobile) and (orientation: landscape) {
@@ -222,12 +231,13 @@
     .prizes__icon {
       width: 26rem;
       position: relative;
-      height: 300px;
+      height: 30rem;
 
       & > svg {
         height: 100%;
         position: absolute;
         transform: translateX(-50%);
+        bottom: 0;
         left: 45%;
       }
 
@@ -237,10 +247,16 @@
 
       @media (max-width: $tablet) and (orientation: portrait) {
         width: 8.66rem;
+        height: 11rem;
       }
 
       @media (max-width: $tablet) and (orientation: landscape) {
         width: 13rem;
+        height: 21rem;
+
+        & > svg {
+          transform: translateX(-30%);
+        }
       }
 
       @media (max-width: $mobile) and (orientation: landscape) {
@@ -250,7 +266,9 @@
   }
 
   &--translate {
-    transform: translateX(100%);
+    @media (min-width: $mobile) {
+      transform: translateX(100%);
+    }
   }
 
   &--hidden {
