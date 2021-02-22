@@ -11,10 +11,7 @@ export default class FullPageScroll {
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
 
-    this.runningAnimations = {
-      jorneys: false,
-      cases: false,
-    };
+    this.animationHasBeenStarted = false;
   }
 
   init() {
@@ -74,19 +71,20 @@ export default class FullPageScroll {
   changeActiveMenuItem() {
     const activeItem = Array.from(this.menuElements).find((item) => item.dataset.href === this.screenElements[this.activeScreen].id);
     if (activeItem) {
-      if (activeItem.getAttribute(`data-href`) === `prizes` && !this.runningAnimations.jorneys) {
-        this.runningAnimations.jorneys = true;
+      if (activeItem.getAttribute(`data-href`) === `prizes` && !this.animationHasBeenStarted) {
+        this.animationHasBeenStarted = true;
         document.getElementById(`journeysAnimation`).beginElement();
         window.setTimeout(() => {
           document.getElementById(`journeys`).classList.remove(`prizes__item--translate`);
         }, 3500);
         window.setTimeout(() => {
           document.getElementById(`cases`).classList.remove(`prizes__item--hidden`);
-        }, 4000);
-        window.setTimeout(() => {
-          this.runningAnimations.cases = true;
           document.getElementById(`casesAnimation`).beginElement();
         }, 4000);
+        window.setTimeout(() => {
+          document.getElementById(`codes`).classList.remove(`prizes__item--translate`, `prizes__item--hidden`);
+          document.getElementById(`codesAnimation`).beginElement();
+        }, 6000);
       }
       this.menuElements.forEach((item) => item.classList.remove(`active`));
       activeItem.classList.add(`active`);

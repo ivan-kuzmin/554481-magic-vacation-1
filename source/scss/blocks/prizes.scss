@@ -212,13 +212,24 @@
   }
 
   &--codes {
-    opacity: 0;
+    opacity: 1;
+    transition: transform 1s, opacity 0.5s 0.5s;
+    transform: translateX(0);
     @media (max-width: $tablet) and (orientation: portrait) {
       padding-left: 0.8rem;
     }
 
     .prizes__icon {
       width: 26rem;
+      position: relative;
+      height: 300px;
+
+      & > svg {
+        height: 100%;
+        position: absolute;
+        transform: translateX(-50%);
+        left: 45%;
+      }
 
       @media (min-width: $stop-scaling) {
         width: 260px;
