@@ -1,4 +1,4 @@
-export default () => {
+export default (fullPageScroll) => {
   let showResultEls = document.querySelectorAll(`.js-show-result`);
   let results = document.querySelectorAll(`.screen--result`);
   if (results.length) {
@@ -27,6 +27,7 @@ export default () => {
         });
         document.getElementById(`messages`).innerHTML = ``;
         document.getElementById(`message-field`).focus();
+        fullPageScroll.restartTimer();
       });
     }
   }
