@@ -1,35 +1,6 @@
 import throttle from 'lodash/throttle';
 import gameTimer from './game-timer';
-
-const journeys = document.getElementById(`journeys`);
-const journeysAnimation = document.getElementById(`journeysAnimation`);
-
-const cases = document.getElementById(`cases`);
-const casesAnimation = document.getElementById(`casesAnimation`);
-const casesCount = document.getElementById(`casesCount`);
-
-const codes = document.getElementById(`codes`);
-const codesAnimation = document.getElementById(`codesAnimation`);
-const codesCount = document.getElementById(`codesCount`);
-
-const startPrizesCounter = ({element, start, end, step}) => {
-  let frame = 0;
-  let count = start;
-  const draw = () => {
-    if (frame % 12 === 0) {
-      element.textContent = count;
-      count += step;
-    }
-    frame++;
-    if (count < end) {
-      window.requestAnimationFrame(draw);
-    } else {
-      count = end;
-      element.textContent = count;
-    }
-  };
-  window.requestAnimationFrame(draw);
-};
+import prizes from './prizes';
 
 export default class FullPageScroll {
   constructor() {
@@ -41,8 +12,6 @@ export default class FullPageScroll {
     this.activeScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
-
-    this.animationHasBeenStarted = false;
   }
 
   init() {
@@ -102,28 +71,8 @@ export default class FullPageScroll {
   changeActiveMenuItem() {
     const activeItem = Array.from(this.menuElements).find((item) => item.dataset.href === this.screenElements[this.activeScreen].id);
     if (activeItem) {
-      if (activeItem.getAttribute(`data-href`) === `prizes` && !this.animationHasBeenStarted) {
-        this.animationHasBeenStarted = true;
-        journeysAnimation.beginElement();
-        window.setTimeout(() => {
-          journeys.classList.remove(`prizes__item--hide-desc`);
-        }, 2500);
-        window.setTimeout(() => {
-          journeys.classList.remove(`prizes__item--translate`);
-        }, 3500);
-        window.setTimeout(() => {
-          cases.classList.remove(`prizes__item--hidden`, `prizes__item--hide-desc`);
-          casesAnimation.beginElement();
-          startPrizesCounter({element: casesCount, start: 1, end: 7, step: 1});
-        }, 4000);
-        window.setTimeout(() => {
-          codes.classList.remove(`prizes__item--hide-icon`);
-          codesAnimation.beginElement();
-        }, 6000);
-        window.setTimeout(() => {
-          codes.classList.remove(`prizes__item--hide-desc`);
-          startPrizesCounter({element: codesCount, start: 11, end: 900, step: 117});
-        }, 6500);
+      if (activeItem.getAttribute(`data-href`) === `prizes`) {
+        prizes.startAnimation();
       } else if (activeItem.getAttribute(`data-href`) === `game`) {
         gameTimer.start();
       }
