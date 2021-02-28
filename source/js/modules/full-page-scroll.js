@@ -1,5 +1,10 @@
 import throttle from 'lodash/throttle';
 
+const COUNTER_TIME = 5 * 60 * 1000;
+
+const counterMin = document.getElementById(`counterMin`);
+const counterSec = document.getElementById(`counterSec`);
+
 export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 2000;
@@ -12,6 +17,9 @@ export default class FullPageScroll {
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
 
     this.animationHasBeenStarted = false;
+
+    this.startTime = 0;
+    this.draw = this.draw.bind(this);
   }
 
   init() {
@@ -85,10 +93,39 @@ export default class FullPageScroll {
           document.getElementById(`codes`).classList.remove(`prizes__item--translate`, `prizes__item--hidden`);
           document.getElementById(`codesAnimation`).beginElement();
         }, 6000);
+      } else if (activeItem.getAttribute(`data-href`) === `game`) {
+        if (!this.startTime) {
+          this.restartTimer();
+          requestAnimationFrame(this.draw);
+        }
       }
       this.menuElements.forEach((item) => item.classList.remove(`active`));
       activeItem.classList.add(`active`);
     }
+  }
+
+  draw() {
+    const restTime = (COUNTER_TIME - (new Date() - this.startTime)) / 1000;
+    const restMin = Math.floor(restTime / 60);
+    const restSec = Math.floor(restTime % 60);
+    const restMinText = restMin.toString().padStart(2, `0`);
+    const restSecText = restSec.toString().padStart(2, `0`);
+    if (counterMin.textContent !== restMinText) {
+      counterMin.textContent = restMinText;
+    }
+    if (counterSec.textContent !== restSecText) {
+      counterSec.textContent = restSecText;
+    }
+    if (restMin > 0 || restSec > 0) {
+      requestAnimationFrame(this.draw);
+    } else {
+      counterMin.textContent = `00`;
+      counterSec.textContent = `00`;
+    }
+  }
+
+  restartTimer() {
+    this.startTime = new Date();
   }
 
   emitChangeDisplayEvent() {
