@@ -11,19 +11,19 @@ import FullPageScroll from './modules/full-page-scroll';
 import onLoad from './modules/onload';
 import AccentTypographyBuild from './modules/accent-typography-build';
 
-const fullPageScroll = new FullPageScroll();
-fullPageScroll.init();
-
 // init modules
 mobileHeight();
 slider();
 menu();
 footer();
 chat();
-result(fullPageScroll);
+result();
 form();
 social();
 onLoad();
+
+const fullPageScroll = new FullPageScroll();
+fullPageScroll.init();
 
 const introTitleAnimation = new AccentTypographyBuild({
   element: document.querySelector(`.intro__title`),

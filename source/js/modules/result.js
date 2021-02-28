@@ -1,4 +1,6 @@
-export default (fullPageScroll) => {
+import gameTimer from './game-timer';
+
+export default () => {
   let showResultEls = document.querySelectorAll(`.js-show-result`);
   let results = document.querySelectorAll(`.screen--result`);
   if (results.length) {
@@ -15,6 +17,7 @@ export default (fullPageScroll) => {
         targetEl[0].classList.add(`screen--show`);
         targetEl[0].classList.remove(`screen--hidden`);
         document.getElementById(`resultAnimation${i}`).beginElement();
+        gameTimer.stop();
       });
     }
 
@@ -27,7 +30,7 @@ export default (fullPageScroll) => {
         });
         document.getElementById(`messages`).innerHTML = ``;
         document.getElementById(`message-field`).focus();
-        fullPageScroll.restartTimer();
+        gameTimer.start();
       });
     }
   }
