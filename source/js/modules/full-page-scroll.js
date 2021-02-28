@@ -1,5 +1,35 @@
 import throttle from 'lodash/throttle';
 
+const journeys = document.getElementById(`journeys`);
+const journeysAnimation = document.getElementById(`journeysAnimation`);
+
+const cases = document.getElementById(`cases`);
+const casesAnimation = document.getElementById(`casesAnimation`);
+const casesCount = document.getElementById(`casesCount`);
+
+const codes = document.getElementById(`codes`);
+const codesAnimation = document.getElementById(`codesAnimation`);
+const codesCount = document.getElementById(`codesCount`);
+
+const startPrizesCounter = ({element, start, end, step}) => {
+  let frame = 0;
+  let count = start;
+  const draw = () => {
+    if (frame % 12 === 0) {
+      element.textContent = count;
+      count += step;
+    }
+    frame++;
+    if (count < end) {
+      window.requestAnimationFrame(draw);
+    } else {
+      count = end;
+      element.textContent = count;
+    }
+  };
+  window.requestAnimationFrame(draw);
+};
+
 export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 2000;
@@ -73,18 +103,26 @@ export default class FullPageScroll {
     if (activeItem) {
       if (activeItem.getAttribute(`data-href`) === `prizes` && !this.animationHasBeenStarted) {
         this.animationHasBeenStarted = true;
-        document.getElementById(`journeysAnimation`).beginElement();
+        journeysAnimation.beginElement();
         window.setTimeout(() => {
-          document.getElementById(`journeys`).classList.remove(`prizes__item--translate`);
+          journeys.classList.remove(`prizes__item--hide-desc`);
+        }, 2500);
+        window.setTimeout(() => {
+          journeys.classList.remove(`prizes__item--translate`);
         }, 3500);
         window.setTimeout(() => {
-          document.getElementById(`cases`).classList.remove(`prizes__item--hidden`);
-          document.getElementById(`casesAnimation`).beginElement();
+          cases.classList.remove(`prizes__item--hidden`, `prizes__item--hide-desc`);
+          casesAnimation.beginElement();
+          startPrizesCounter({element: casesCount, start: 1, end: 7, step: 1});
         }, 4000);
         window.setTimeout(() => {
-          document.getElementById(`codes`).classList.remove(`prizes__item--translate`, `prizes__item--hidden`);
-          document.getElementById(`codesAnimation`).beginElement();
+          codes.classList.remove(`prizes__item--hide-icon`);
+          codesAnimation.beginElement();
         }, 6000);
+        window.setTimeout(() => {
+          codes.classList.remove(`prizes__item--hide-desc`);
+          startPrizesCounter({element: codesCount, start: 11, end: 900, step: 117});
+        }, 6500);
       }
       this.menuElements.forEach((item) => item.classList.remove(`active`));
       activeItem.classList.add(`active`);
