@@ -126,6 +126,27 @@
     margin-left: 5rem;
   }
 
+  .prizes__icon {
+    opacity: 1;
+    transform: translateX(0);
+    transition-property: opacity, transform;
+    transition-duration: 0.2s;
+  }
+
+  .prizes__desc {
+    & > *:nth-child(1) {
+      opacity: 1;
+    }
+
+    & > *:nth-child(2) {
+      opacity: 1;
+      transform: translateX(0);
+      transition-property: opacity, transform;
+      transition-duration: 0.5s;
+      transition-delay: 0.1s;
+    }
+  }
+
   &--journeys {
     transition: transform 1s;
     transform: translateX(0);
@@ -216,6 +237,13 @@
         width: 7rem;
       }
     }
+
+    .prizes__desc {
+      & > *:nth-child(1) {
+        width: 0.5em;
+        text-align: right;
+      }
+    }
   }
 
   &--codes {
@@ -261,6 +289,13 @@
         width: 10rem;
       }
     }
+
+    .prizes__desc {
+      & > *:nth-child(1) {
+        width: 1.6em;
+        text-align: right;
+      }
+    }
   }
 
   &--translate {
@@ -271,6 +306,26 @@
 
   &--hidden {
     opacity: 0;
+  }
+
+  &--hide-icon {
+    .prizes__icon {
+      opacity: 0;
+      transform: translateX(25%);
+    }
+  }
+
+  &--hide-desc {
+    .prizes__desc {
+      & > *:nth-child(1) {
+        opacity: 0;
+      }
+
+      & > *:nth-child(2) {
+        opacity: 0;
+        transform: translateX(25%);
+      }
+    }
   }
 }
 

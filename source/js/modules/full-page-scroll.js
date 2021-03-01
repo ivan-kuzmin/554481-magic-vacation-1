@@ -1,9 +1,6 @@
 import throttle from 'lodash/throttle';
-
-const COUNTER_TIME = 5 * 60 * 1000;
-
-const counterMin = document.getElementById(`counterMin`);
-const counterSec = document.getElementById(`counterSec`);
+import gameTimer from './game-timer';
+import prizes from './prizes';
 
 export default class FullPageScroll {
   constructor() {
@@ -15,11 +12,6 @@ export default class FullPageScroll {
     this.activeScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
-
-    this.animationHasBeenStarted = false;
-
-    this.startTime = 0;
-    this.draw = this.draw.bind(this);
   }
 
   init() {
@@ -79,53 +71,14 @@ export default class FullPageScroll {
   changeActiveMenuItem() {
     const activeItem = Array.from(this.menuElements).find((item) => item.dataset.href === this.screenElements[this.activeScreen].id);
     if (activeItem) {
-      if (activeItem.getAttribute(`data-href`) === `prizes` && !this.animationHasBeenStarted) {
-        this.animationHasBeenStarted = true;
-        document.getElementById(`journeysAnimation`).beginElement();
-        window.setTimeout(() => {
-          document.getElementById(`journeys`).classList.remove(`prizes__item--translate`);
-        }, 3500);
-        window.setTimeout(() => {
-          document.getElementById(`cases`).classList.remove(`prizes__item--hidden`);
-          document.getElementById(`casesAnimation`).beginElement();
-        }, 4000);
-        window.setTimeout(() => {
-          document.getElementById(`codes`).classList.remove(`prizes__item--translate`, `prizes__item--hidden`);
-          document.getElementById(`codesAnimation`).beginElement();
-        }, 6000);
+      if (activeItem.getAttribute(`data-href`) === `prizes`) {
+        prizes.startAnimation();
       } else if (activeItem.getAttribute(`data-href`) === `game`) {
-        if (!this.startTime) {
-          this.restartTimer();
-          requestAnimationFrame(this.draw);
-        }
+        gameTimer.start();
       }
       this.menuElements.forEach((item) => item.classList.remove(`active`));
       activeItem.classList.add(`active`);
     }
-  }
-
-  draw() {
-    const restTime = (COUNTER_TIME - (new Date() - this.startTime)) / 1000;
-    const restMin = Math.floor(restTime / 60);
-    const restSec = Math.floor(restTime % 60);
-    const restMinText = restMin.toString().padStart(2, `0`);
-    const restSecText = restSec.toString().padStart(2, `0`);
-    if (counterMin.textContent !== restMinText) {
-      counterMin.textContent = restMinText;
-    }
-    if (counterSec.textContent !== restSecText) {
-      counterSec.textContent = restSecText;
-    }
-    if (restMin > 0 || restSec > 0) {
-      requestAnimationFrame(this.draw);
-    } else {
-      counterMin.textContent = `00`;
-      counterSec.textContent = `00`;
-    }
-  }
-
-  restartTimer() {
-    this.startTime = new Date();
   }
 
   emitChangeDisplayEvent() {
