@@ -1,4 +1,5 @@
 import gameTimer from './game-timer';
+import WarlusAnimation from './warlus-animation';
 
 export default () => {
   let showResultEls = document.querySelectorAll(`.js-show-result`);
@@ -17,6 +18,7 @@ export default () => {
         targetEl[0].classList.add(`screen--show`);
         targetEl[0].classList.remove(`screen--hidden`);
         document.getElementById(`resultAnimation${i}`).beginElement();
+        WarlusAnimation.start();
         gameTimer.stop();
       });
     }
